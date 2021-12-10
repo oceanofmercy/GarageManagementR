@@ -303,10 +303,10 @@ int main()
             }
             case 2:
             {
-                cout << "\nEnter user name(Unique): ";
+  cout << "\nEnter user name(Unique): ";
                 cin.getline(userN, 20);
                 int y = l + 1;
-                for (t = 0; t <= l; t++)
+                for (t = 0; t < l; t++)
                 {
                     if (log[t]->searchP(userN))
                     {
@@ -314,7 +314,12 @@ int main()
                         break;
                     }
                 }
-                if (y < l + 1)
+                if (y >= l + 1)
+                {
+                    cout << "\nNo such Person with user name '" << userN << "' exitsts. Try again!";
+                    break;
+                }
+                else
                 {
                     int x = log[y]->checkPassword();
                     if (x)
@@ -371,8 +376,6 @@ int main()
                         }
                     }
                 }
-                else
-                    cout << "\nNo such Person with user name '" << userN << "' exitsts. Try again!";
                 break;
             }
             case 3:
@@ -390,7 +393,7 @@ int main()
             cout << "\nIs this car bought from Krishna Motors?(Y/N)";
             char b;
             cin >> b;
-            if (b == 'Y')
+            if (b == 'Y'||b=='y')
                 cout << "\nCongratulations you're eligible for Rs.100 discount";
             cout << "\nYour bill to be paid is Rs." << rand() % 10000;
             cout << "\nThank you! Visit Again!";
