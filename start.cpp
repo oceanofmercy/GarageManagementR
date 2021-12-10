@@ -193,6 +193,26 @@ int main()
         case 1:
         {
             //CAR RENTING SYSTEM TO BE DESIGNED
+            cout << "\nWelcome to RideSure,Safety with pace.";
+            string cv;
+            int ride;
+            cout << "\nPlease enter the approximate fare of ride(in KM): ";
+            cin >> ride;
+            int am;
+            if (ride < 10)
+                am = (rand() % 10) * (rand() % 5) * ride;
+            else
+                am = (rand() % 15) * (rand() % 7) * ride;
+            cout << "\nIs this your first ride on RideSure(Y/N)? ";
+            cin >> cv;
+            if (cv == "Y" || cv == "y")
+            {
+                cout << "\nCongratulations you're now eligible for Rs." << am / 10 << " discount...";
+                am = am - am / 10;
+            }
+            cout << "\nProceed to pay Rs." << am;
+            cout << "\nThanks! Travel with us again.";
+            break;
         }
         case 2:
         {
@@ -206,17 +226,17 @@ int main()
                 cin.getline(namebuy, 20);
                 cout << "\nEnter model number: ";
                 cin.getline(modelbuy, 20);
-                int z=i+1;
+                int z = i + 1;
                 for (t = 0; t <= i; t++)
                 {
                     if ((B[t]->search(namebuy, modelbuy)))
                     {
-                        z=t;
+                        z = t;
                         B[t]->buycar();
                         break;
                     }
                 }
-                if(z>i)
+                if (z > i)
                     cout << "\nThis Car is not in stock.";
             }
             break;
@@ -231,15 +251,15 @@ int main()
                 cin.getline(namebuy, 20);
                 cout << "\nEnter Model number: ";
                 cin.getline(modelbuy, 20);
-                 int r=i+1;
-                for(t=0;t<=i;t++)
+                int r = i + 1;
+                for (t = 0; t <= i; t++)
                 {
-                    if(B[t]->search(namebuy,modelbuy))
+                    if (B[t]->search(namebuy, modelbuy))
                     {
-                        r=t;
+                        r = t;
                         break;
                     }
-                   /* if(!(B[t]->search(namebuy,modelbuy)))
+                    /* if(!(B[t]->search(namebuy,modelbuy)))
                     {
                         cout<<"\nThis car is not in stock ";
                     }
@@ -248,11 +268,12 @@ int main()
                         B[t]->showdata();
                     }*/
                 }
-                if(r<i+1)
+                if (r < i + 1)
                 {
                     B[r]->showdata();
                 }
-                else{
+                else
+                {
                     "\nThis car is not in stack";
                 }
             }
@@ -261,108 +282,105 @@ int main()
         case 4:
         {
             //RENTAL SYSTEM TO BE DESIGNED
-           // while (1)
+            // while (1)
             //{
-                int choice2;
-                cout << "\n\t\tSelect an option: "
-                     << "\n1.Register"
-                     << "\n2.Login"
-                     << "\n3.Exit\n";
+            int choice2;
+            cout << "\n\t\tSelect an option: "
+                 << "\n1.Register"
+                 << "\n2.Login"
+                 << "\n3.Exit\n";
 
-                cin >> choice2;
-                cin.ignore();
-                switch (choice2)
+            cin >> choice2;
+            cin.ignore();
+            switch (choice2)
+            {
+            case 1:
+            {
+                log[l] = new login;
+                log[l]->setPassword();
+                l++;
+                break;
+            }
+            case 2:
+            {
+                cout << "\nEnter user name(Unique): ";
+                cin.getline(userN, 20);
+                int y = l + 1;
+                for (t = 0; t <= l; t++)
                 {
-                case 1:
-                {
-                    log[l] = new login;
-                    log[l]->setPassword();
-                    l++;
-                    break;
-                }
-                case 2:
-                {
-                    cout << "\nEnter user name(Unique): ";
-                    cin.getline(userN, 20);
-                    int y = l + 1;
-                    for (t = 0; t <= l; t++)
+                    if (log[t]->searchP(userN))
                     {
-                        if (log[t]->searchP(userN))
+                        y = t;
+                        break;
+                    }
+                }
+                if (y < l + 1)
+                {
+                    int x = log[y]->checkPassword();
+                    if (x)
+                    {
+                        cout << "\nWelcome! You've been verified as an employee of the store. Choose an option: ";
+
+                        int choice3;
+                        cout << "\nChoose an option: \n1.Add cars to store.\n2.Exit\n";
+                        cin >> choice3;
+                        cin.ignore();
+                        switch (choice3)
                         {
-                            y = t;
+                        case 1:
+                        {
+
+                            if (i == 0)
+                                B[i] = new car;
+                            //case 1: store already have some of car
+
+                            char *c_name = new char[20];
+                            char *m_name = new char[20];
+
+                            cout << "\nEnter car name: ";
+                            cin.getline(c_name, 20);
+                            cout << "\nEnter model number: ";
+                            cin.getline(m_name, 20);
+
+                            int z = i;
+                            for (int b = 0; b < i; b++)
+                            {
+                                if (B[b]->search(c_name, m_name))
+                                {
+                                    z = b;
+                                    break;
+                                }
+                            }
+                            if (z < i)
+                                B[z]->feeddataO(c_name, m_name);
+                            // case 2: car is new
+                            else
+                            {
+                                i++;
+                                B[i] = new car;
+
+                                B[i]->feeddata(c_name, m_name);
+                            }
+
                             break;
                         }
-                    }
-                    if (y < l + 1)
-                    {
-                        int x = log[y]->checkPassword();
-                        if (x)
-                        {
-                            cout << "\nWelcome! You've been verified as an employee of the store. Choose an option: ";
-
-
-
-                            int choice3;
-                            cout<<"\nChoose an option: \n1.Add cars to store.\n2.Exit\n";
-                            cin >> choice3;
-                                cin.ignore();
-                                switch (choice3)
-                                {
-                                case 1:
-                                {
-
-                                    if (i == 0)
-                                        B[i] = new car;
-                                    //case 1: store already have some of car
-
-                                    char *c_name = new char[20];
-                                    char *m_name = new char[20];
-
-                                    cout << "\nEnter car name: ";
-                                    cin.getline(c_name, 20);
-                                    cout << "\nEnter model number: ";
-                                    cin.getline(m_name, 20);
-
-
-                                    int z = i;
-                                    for (int b = 0; b < i; b++)
-                                    {
-                                        if (B[b]->search(c_name, m_name))
-                                        {
-                                            z = b;
-                                            break;
-                                        }
-                                    }
-                                    if (z < i)
-                                        B[z]->feeddataO(c_name, m_name);
-                                    // case 2: car is new
-                                    else
-                                    {
-                                        i++;
-                                        B[i] = new car;
-
-                                        B[i]->feeddata(c_name, m_name);
-                                    }
-
-                                    break;
-                                }
-                                case 2:
-                                    break;
-                                default:
-                                    cout << "\nPlease choose a valid option.";
-                                }
+                        case 2:
+                            break;
+                        default:
+                            cout << "\nPlease choose a valid option.";
                         }
                     }
-                    else
-                        cout << "\nNo such Person with user name '" << userN << "' exitsts. Try again!";
-                    break;
                 }
-                case 3:
-                    break;
+                else
+                    cout << "\nNo such Person with user name '" << userN << "' exitsts. Try again!";
+                break;
+            }
+            case 3:
+                break;
 
-                default:
-                    cout << "\nPlease select valid option!";
-                }
+            default:
+                cout << "\nPlease select valid option!";
+            }
 
             break;
         }
