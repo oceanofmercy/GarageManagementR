@@ -176,7 +176,7 @@ int login::searchP(char userN[20])
         return 0;
 }
 
-class utility: public car, public login{ 
+class utility: public login{ 
 public:
 void rent();
 void garage();
